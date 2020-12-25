@@ -3,10 +3,28 @@
 
 #macro view view_camera[0]
 
-camera_set_view_size(view, viewWidth, viewHeight);
+camera_set_view_size(view, VIEW_WIDTH, VIEW_HEIGHT);
 
-if (instance_exists(objPlayer)) {
-	var currentSectorX = floor(objPlayer.x / viewWidth) * viewWidth;
-	var currentSectorY = floor(objPlayer.y / viewHeight) * viewHeight;
-	camera_set_view_pos(view, currentSectorX, currentSectorY);
+if (!instance_exists(objPlayer)) {
+	exit;
+} else if (x == -1) {
+	x = floor(objPlayer.x / VIEW_WIDTH) * VIEW_WIDTH;
+	y = floor(objPlayer.y / VIEW_HEIGHT) * VIEW_HEIGHT;
 }
+
+var playerSectorX = floor(objPlayer.x / VIEW_WIDTH) * VIEW_WIDTH;
+var playerSectorY = floor(objPlayer.y / VIEW_HEIGHT) * VIEW_HEIGHT;
+
+if (x < playerSectorX) {
+	x = min(playerSectorX, x + SLIDE_HORIZONTAL_PIXELS_PER_FRAME);
+} else if (x > playerSectorX) {
+	x = max(playerSectorX, x - SLIDE_HORIZONTAL_PIXELS_PER_FRAME);
+}
+
+if (y < playerSectorY) {
+	y = min(playerSectorY, y + SLIDE_VERTICAL_PIXELS_PER_FRAME);
+} else if (y > playerSectorY) {
+	y = max(playerSectorY, y - SLIDE_VERTICAL_PIXELS_PER_FRAME);
+}
+
+camera_set_view_pos(view, x, y);
