@@ -1,11 +1,15 @@
 {
   "resources": [
+    {"id":{"name":"sTempWorld","path":"sprites/sTempWorld/sTempWorld.yy",},"order":3,},
     {"id":{"name":"objPlayer","path":"objects/objPlayer/objPlayer.yy",},"order":1,},
-    {"id":{"name":"sprPlayer","path":"sprites/sprPlayer/sprPlayer.yy",},"order":0,},
+    {"id":{"name":"sPlayer","path":"sprites/sPlayer/sPlayer.yy",},"order":0,},
+    {"id":{"name":"scrWorldGen","path":"scripts/scrWorldGen/scrWorldGen.yy",},"order":0,},
     {"id":{"name":"objCamera","path":"objects/objCamera/objCamera.yy",},"order":0,},
-    {"id":{"name":"sprWorld","path":"sprites/sprWorld/sprWorld.yy",},"order":2,},
-    {"id":{"name":"tsWorld","path":"tilesets/tsWorld/tsWorld.yy",},"order":0,},
-    {"id":{"name":"sprTempBackground","path":"sprites/sprTempBackground/sprTempBackground.yy",},"order":1,},
+    {"id":{"name":"sTempSimple","path":"sprites/sTempSimple/sTempSimple.yy",},"order":2,},
+    {"id":{"name":"tsTempSimple","path":"tilesets/tsTempSimple/tsTempSimple.yy",},"order":0,},
+    {"id":{"name":"tsTempWorld","path":"tilesets/tsTempWorld/tsTempWorld.yy",},"order":1,},
+    {"id":{"name":"sTempBackground","path":"sprites/sTempBackground/sTempBackground.yy",},"order":1,},
+    {"id":{"name":"rmWorld","path":"rooms/rmWorld/rmWorld.yy",},"order":3,},
     {"id":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},"order":1,},
     {"id":{"name":"rmInit","path":"rooms/rmInit/rmInit.yy",},"order":0,},
   ],
@@ -25,6 +29,7 @@
   "RoomOrderNodes": [
     {"roomId":{"name":"rmInit","path":"rooms/rmInit/rmInit.yy",},},
     {"roomId":{"name":"rmMain","path":"rooms/rmMain/rmMain.yy",},},
+    {"roomId":{"name":"rmWorld","path":"rooms/rmWorld/rmWorld.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":1,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},

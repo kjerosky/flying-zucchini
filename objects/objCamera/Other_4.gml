@@ -1,2 +1,5 @@
 view_enabled = true;
 view_visible[0] = true;
+
+x = UNINITIALIZED_CAMERA_PIXEL_POSITION;
+y = UNINITIALIZED_CAMERA_PIXEL_POSITION;

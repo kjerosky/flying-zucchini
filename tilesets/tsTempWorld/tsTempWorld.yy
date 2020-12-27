@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprWorld",
-    "path": "sprites/sprWorld/sprWorld.yy",
+    "name": "sTempWorld",
+    "path": "sprites/sTempWorld/sTempWorld.yy",
   },
   "tileWidth": 16,
   "tileHeight": 16,
@@ -17,7 +17,7 @@
   "out_tilehborder": 2,
   "out_tilevborder": 2,
   "out_columns": 2,
-  "tile_count": 3,
+  "tile_count": 6,
   "autoTileSets": [],
   "tileAnimationFrames": [],
   "tileAnimationSpeed": 15.0,
@@ -26,6 +26,9 @@
       0,
       1,
       2,
+      3,
+      4,
+      5,
     ],
     "SerialiseFrameCount": 1,
   },
@@ -39,7 +42,7 @@
     "path": "folders/Tile Sets.yy",
   },
   "resourceVersion": "1.0",
-  "name": "tsWorld",
+  "name": "tsTempWorld",
   "tags": [],
   "resourceType": "GMTileSet",
 }

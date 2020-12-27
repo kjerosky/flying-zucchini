@@ -7,7 +7,7 @@ camera_set_view_size(view, VIEW_WIDTH, VIEW_HEIGHT);
 
 if (!instance_exists(objPlayer)) {
 	exit;
-} else if (x == -1) {
+} else if (x == UNINITIALIZED_CAMERA_PIXEL_POSITION) {
 	x = floor(objPlayer.x / VIEW_WIDTH) * VIEW_WIDTH;
 	y = floor(objPlayer.y / VIEW_HEIGHT) * VIEW_HEIGHT;
 }
