@@ -1,36 +1,11 @@
-if (keyboard_check_pressed(vk_enter)) {
+if (oInput.swapLevelPressed) {
 	room_goto(room == rmMain ? rmWorld : rmMain);
-} else if (keyboard_check_pressed(vk_space)) {
+} else if (oInput.generateWorldPressed) {
 	generateWorld();
 }
 
-var xInput = keyboard_check(ord("D")) - keyboard_check(ord("A"));
-var yInput = keyboard_check(ord("S")) - keyboard_check(ord("W"));
-if (keyboard_check_pressed(ord("J"))) {
-	xInput = -1;
-	yInput = 0;
-} else if (keyboard_check_pressed(ord("L"))) {
-	xInput = 1;
-	yInput = 0;
-} else if (keyboard_check_pressed(ord("I"))) {
-	xInput = 0;
-	yInput = -1;
-} else if (keyboard_check_pressed(188)) {
-	xInput = 0;
-	yInput = 1;
-} else if (keyboard_check_pressed(ord("U"))) {
-	xInput = -1;
-	yInput = -1;
-} else if (keyboard_check_pressed(ord("O"))) {
-	xInput = 1;
-	yInput = -1;
-} else if (keyboard_check_pressed(ord("M"))) {
-	xInput = -1;
-	yInput = 1;
-} else if (keyboard_check_pressed(190)) {
-	xInput = 1;
-	yInput = 1;
-}
+var xInput = oInput.moveX;
+var yInput = oInput.moveY;
 
 var xSpeed = xInput * PLAYER_SPEED;
 var ySpeed = yInput * PLAYER_SPEED;

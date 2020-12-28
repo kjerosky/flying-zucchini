@@ -5,15 +5,15 @@
 
 camera_set_view_size(view, VIEW_WIDTH, VIEW_HEIGHT);
 
-if (!instance_exists(objPlayer)) {
+if (!instance_exists(oPlayer)) {
 	exit;
 } else if (x == UNINITIALIZED_CAMERA_PIXEL_POSITION) {
-	x = floor(objPlayer.x / VIEW_WIDTH) * VIEW_WIDTH;
-	y = floor(objPlayer.y / VIEW_HEIGHT) * VIEW_HEIGHT;
+	x = floor(oPlayer.x / VIEW_WIDTH) * VIEW_WIDTH;
+	y = floor(oPlayer.y / VIEW_HEIGHT) * VIEW_HEIGHT;
 }
 
-var playerSectorX = floor(objPlayer.x / VIEW_WIDTH) * VIEW_WIDTH;
-var playerSectorY = floor(objPlayer.y / VIEW_HEIGHT) * VIEW_HEIGHT;
+var playerSectorX = floor(oPlayer.x / VIEW_WIDTH) * VIEW_WIDTH;
+var playerSectorY = floor(oPlayer.y / VIEW_HEIGHT) * VIEW_HEIGHT;
 
 if (x < playerSectorX) {
 	x = min(playerSectorX, x + SLIDE_HORIZONTAL_PIXELS_PER_FRAME);
