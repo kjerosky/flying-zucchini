@@ -60,7 +60,7 @@ if (!xHadCollision && !yHadCollision &&
 }
 
 if (xHadCollision) {
-	x -= x mod TILE_LENGTH;
+	x -= x % TILE_LENGTH;
 	if (sign(xSpeed) == 1) {
 		x += TILE_LENGTH - 1;
 	}
@@ -68,7 +68,7 @@ if (xHadCollision) {
 }
 
 if (yHadCollision) {
-	y -= y mod TILE_LENGTH;
+	y -= y % TILE_LENGTH;
 	if (sign(ySpeed) == 1) {
 		y += TILE_LENGTH - 1;
 	}
@@ -77,3 +77,28 @@ if (yHadCollision) {
 
 x += xSpeed;
 y += ySpeed;
+
+
+
+var inputDirection = point_direction(0, 0, xInput, yInput);
+var inputMagnitude = point_distance(0, 0, xInput, yInput);
+var oldSpriteIndex = sprite_index;
+if (inputMagnitude != 0) {
+	direction = inputDirection;
+	sprite_index = spriteWalk;
+} else {
+	sprite_index = spriteIdle;
+}
+
+if (oldSpriteIndex != sprite_index) {
+	localFrame = 0;
+}
+
+var cardinalDirection = floor(((direction + 45) % 360) / 90);
+var totalFrames = sprite_get_number(sprite_index) / 4;
+image_index = (cardinalDirection * totalFrames) + localFrame;
+
+localFrame += sprite_get_speed(sprite_index) / game_get_speed(gamespeed_fps);
+if (localFrame >= totalFrames) {
+	localFrame -= totalFrames;
+}
