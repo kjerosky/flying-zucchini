@@ -7,9 +7,8 @@ if (oInput.swapLevelPressed) {
 var xInput = oInput.moveX;
 var yInput = oInput.moveY;
 
-var inputDirection = point_direction(0, 0, xInput, yInput);
-var xSpeed = xInput != 0 ? lengthdir_x(PLAYER_SPEED, inputDirection) : 0;
-var ySpeed = yInput != 0 ? lengthdir_y(PLAYER_SPEED, inputDirection) : 0;
+var xSpeed = WALK_SPEED * xInput;
+var ySpeed = WALK_SPEED * yInput;
 
 var collisionLayerId = layer_get_id("CollisionTiles");
 var collisionTileMap = layer_tilemap_get_id(collisionLayerId);

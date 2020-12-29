@@ -27,5 +27,11 @@ if (keyboard_check_pressed(ord("J"))) {
 	moveY = 1;
 }
 
+if (point_distance(0, 0, moveX, moveY) > 1) {
+	var moveDirection = point_direction(0, 0, moveX, moveY);
+	moveX = lengthdir_x(1, moveDirection);
+	moveY = lengthdir_y(1, moveDirection);
+}
+
 swapLevelPressed = keyboard_check_pressed(vk_enter);
 generateWorldPressed = keyboard_check_pressed(vk_space);

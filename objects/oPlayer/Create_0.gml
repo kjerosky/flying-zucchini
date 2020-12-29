@@ -1,1 +1,1 @@
-PLAYER_SPEED = 1;
+WALK_SPEED = 1;
