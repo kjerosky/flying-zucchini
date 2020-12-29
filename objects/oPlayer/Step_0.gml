@@ -11,9 +11,52 @@ var inputMagnitude = point_distance(0, 0, xInput, yInput);
 var xSpeed = WALK_SPEED * xInput;
 var ySpeed = WALK_SPEED * yInput;
 
+var roomLeftX = floor(x / SECTOR_WIDTH) * SECTOR_WIDTH;
+var roomRightX = roomLeftX + SECTOR_WIDTH;
+var roomTopY = floor(y / SECTOR_HEIGHT) * SECTOR_HEIGHT;
+var roomBottomY = roomTopY + SECTOR_HEIGHT;
+
+var isNearLeftSectorEdge = x < roomLeftX + TILE_LENGTH / 2;
+var isNearRightSectorEdge = x > roomRightX - TILE_LENGTH / 2;
+var isNearTopSectorEdge = y < roomTopY + TILE_LENGTH;
+var isNearBottomSectorEdge = y > roomBottomY - TILE_LENGTH / 8;
+var isNearSectorEdge =
+	isNearLeftSectorEdge ||
+	isNearRightSectorEdge ||
+	isNearTopSectorEdge ||
+	isNearBottomSectorEdge;
+
 if (state == PlayerState.IDLE && inputMagnitude != 0) {
 	state = PlayerState.WALKING;
 } else if (state == PlayerState.WALKING && inputMagnitude == 0) {
+	state = PlayerState.IDLE;
+} else if ((state == PlayerState.IDLE || state == PlayerState.WALKING) && isNearSectorEdge) {
+	state = PlayerState.MOVING_TO_NEXT_ROOM;
+
+	if (isNearLeftSectorEdge) {
+		nextRoomMoveAmountX = -TILE_LENGTH * 1.5 / oCamera.SLIDE_TOTAL_FRAMES;
+		nextRoomMoveAmountY = 0;
+		nextRoomMoveFramesRemaining = oCamera.SLIDE_TOTAL_FRAMES + (x - roomLeftX) / (-nextRoomMoveAmountX);
+		middleOctant = 4;
+	} else if (isNearRightSectorEdge) {
+		nextRoomMoveAmountX = TILE_LENGTH * 1.5 / oCamera.SLIDE_TOTAL_FRAMES;
+		nextRoomMoveAmountY = 0;
+		nextRoomMoveFramesRemaining = oCamera.SLIDE_TOTAL_FRAMES + (roomLeftX + SECTOR_WIDTH - x) / nextRoomMoveAmountX;
+		middleOctant = 0;
+	} else if (isNearTopSectorEdge) {
+		nextRoomMoveAmountX = 0;
+		nextRoomMoveAmountY = -TILE_LENGTH / oCamera.SLIDE_TOTAL_FRAMES;
+		nextRoomMoveFramesRemaining = oCamera.SLIDE_TOTAL_FRAMES + (y - roomTopY) / (-nextRoomMoveAmountY);
+		middleOctant = 2;
+	} else {
+		nextRoomMoveAmountX = 0;
+		nextRoomMoveAmountY = TILE_LENGTH * 2 / oCamera.SLIDE_TOTAL_FRAMES;
+		nextRoomMoveFramesRemaining = oCamera.SLIDE_TOTAL_FRAMES + (roomTopY + SECTOR_HEIGHT - y) / nextRoomMoveAmountY;
+		middleOctant = 6;
+	}
+	lowerOctant = middleOctant == 0 ? 7 : middleOctant - 1
+	higherOctant = middleOctant + 1;
+} else if (state == PlayerState.MOVING_TO_NEXT_ROOM && nextRoomMoveFramesRemaining <= 0) {
 	state = PlayerState.IDLE;
 }
 
@@ -105,6 +148,17 @@ switch (state) {
 			}
 			ySpeed = 0;
 		}
+
+		x += xSpeed;
+		y += ySpeed;
+	} break;
+
+	case PlayerState.MOVING_TO_NEXT_ROOM: {
+		sprite_index = spriteWalk;
+
+		nextRoomMoveFramesRemaining--;
+		x += nextRoomMoveAmountX;
+		y += nextRoomMoveAmountY;
 	} break;
 }
 
@@ -120,6 +174,3 @@ localFrame += sprite_get_speed(sprite_index) / game_get_speed(gamespeed_fps);
 if (localFrame >= totalFrames) {
 	localFrame -= totalFrames;
 }
-
-x += xSpeed;
-y += ySpeed;

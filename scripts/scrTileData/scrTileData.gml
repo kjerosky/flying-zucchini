@@ -1,1 +1,4 @@
-#macro TILE_LENGTH (16)
+#macro SECTOR_WIDTH 256
+#macro SECTOR_HEIGHT 144
+
+#macro TILE_LENGTH 16
