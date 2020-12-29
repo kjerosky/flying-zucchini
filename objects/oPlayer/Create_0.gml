@@ -4,5 +4,8 @@ spriteIdle = sPlayerIdle;
 spriteWalk = sPlayerWalk;
 localFrame = 0;
 
-direction = 270;
 image_speed = 0;
+
+lowerOctant = 5;
+middleOctant = 6;
+higherOctant = 7;

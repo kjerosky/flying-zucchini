@@ -80,12 +80,25 @@ y += ySpeed;
 
 
 
-var inputDirection = point_direction(0, 0, xInput, yInput);
 var inputMagnitude = point_distance(0, 0, xInput, yInput);
 var oldSpriteIndex = sprite_index;
 if (inputMagnitude != 0) {
-	direction = inputDirection;
 	sprite_index = spriteWalk;
+
+	var inputDirection = point_direction(0, 0, xInput, yInput);
+	var currentOctant = floor(((inputDirection + 22.5) % 360) / 45);
+	if (currentOctant != lowerOctant && currentOctant != middleOctant && currentOctant != higherOctant) {
+		if (currentOctant >= 3 && currentOctant <= 5) {
+			middleOctant = 4;
+		} else if (currentOctant == 0 || currentOctant == 1 || currentOctant == 7) {
+			middleOctant = 0;
+		} else {
+			middleOctant = currentOctant;
+		}
+
+		lowerOctant = middleOctant == 0 ? 7 : middleOctant - 1
+		higherOctant = middleOctant + 1;
+	}
 } else {
 	sprite_index = spriteIdle;
 }
@@ -94,9 +107,9 @@ if (oldSpriteIndex != sprite_index) {
 	localFrame = 0;
 }
 
-var cardinalDirection = floor(((direction + 45) % 360) / 90);
+var facingDirection = middleOctant / 2;
 var totalFrames = sprite_get_number(sprite_index) / 4;
-image_index = (cardinalDirection * totalFrames) + localFrame;
+image_index = (facingDirection * totalFrames) + localFrame;
 
 localFrame += sprite_get_speed(sprite_index) / game_get_speed(gamespeed_fps);
 if (localFrame >= totalFrames) {
