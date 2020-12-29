@@ -90,10 +90,10 @@ if (inputMagnitude != 0) {
 	if (currentOctant != lowerOctant && currentOctant != middleOctant && currentOctant != higherOctant) {
 		if (currentOctant >= 3 && currentOctant <= 5) {
 			middleOctant = 4;
-		} else if (currentOctant == 0 || currentOctant == 1 || currentOctant == 7) {
-			middleOctant = 0;
-		} else {
+		} else if (currentOctant == 2 || currentOctant == 6) {
 			middleOctant = currentOctant;
+		} else {
+			middleOctant = 0;
 		}
 
 		lowerOctant = middleOctant == 0 ? 7 : middleOctant - 1
