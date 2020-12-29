@@ -1,3 +1,9 @@
+enum PlayerState {
+	IDLE,
+	WALKING
+};
+state = PlayerState.IDLE;
+
 WALK_SPEED = 1;
 
 spriteIdle = sPlayerIdle;
